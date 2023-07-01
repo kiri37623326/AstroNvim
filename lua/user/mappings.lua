@@ -50,6 +50,15 @@ return {
     ["+"] = { "<C-a>" },
     ["-"] = { "<C-x>" },
     ["<Leader>re"] = { ":%s;\\<<C-R><C-W>\\>;g<Left><Left>;" },
+
+
+    -- hop.nvim mapping
+    ["<leader>jw"] = {"<cmd>HopWord<CR>"}, -- jump word
+    ["<leader>jv"] = {"<cmd>HopVertical<CR>"}, -- jump vertical
+    
+    -- edgemotion mapping
+		["<Leader>J"] = {"<Plug>(edgemotion-j)"},
+		["<Leader>K"] = {"<Plug>(edgemotion-k)"},
   },
   o = {
     ["8"] = { "i(" },

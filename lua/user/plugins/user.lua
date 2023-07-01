@@ -19,18 +19,50 @@ return {
       vim.keymap.set({ "n" }, "k", "<Plug>(accelerated_jk_gk)", option)
     end,
   },
-  {
-    "jackMort/ChatGPT.nvim",
+  -- {
+  --   "jackMort/ChatGPT.nvim",
+  --   config = function()
+  --     require("chatgpt").setup({})
+  --     vim.keymap.set({ "n" }, "<Leader>ck", "<cmd>:ChatGPT<CR>")
+  --     vim.keymap.set({ "n" }, "<Leader>cj", "<cmd>:ChatGPTActAs<CR>")
+  --     vim.keymap.set({ "n" }, "<Leader>ci", "<cmd>:ChatGPTEditWithInstructions<CR>")
+  --   end,
+  --   requires = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-telescope/telescope.nvim"
+  --   }
+  -- }
+  { -- カーソルジャンプ
+    'phaazon/hop.nvim',
+    branch = 'v2',
+    event = "BufReadPost",
     config = function()
-      require("chatgpt").setup({})
-      vim.keymap.set({ "n" }, "<Leader>ck", "<cmd>:ChatGPT<CR>")
-      vim.keymap.set({ "n" }, "<Leader>cj", "<cmd>:ChatGPTActAs<CR>")
-      vim.keymap.set({ "n" }, "<Leader>ci", "<cmd>:ChatGPTEditWithInstructions<CR>")
-    end,
-    requires = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
-    }
-  }
+      require'hop'.setup()
+    end
+  },
+  { -- insert modeで行数を絶対値に
+		"myusuf3/numbers.vim",
+		event = "InsertEnter",
+		setup = function()
+      vim.g.numbers_exclude = {
+	      "tagbar",
+	      "NvimTree",
+	      "NvimTree",
+	      "gundo",
+	      "minibufexpl",
+	      "toggleterm",
+	      "dashboard",
+	      "packer",
+      }
+		end,
+	},
+	{ -- fやtコマンドで一回か2回で飛べる文字をハイライト
+		"unblevable/quick-scope",
+		event = "BufReadPost",
+	},
+	{ -- 文字のない部分を飛ばすjk移動
+		"haya14busa/vim-edgemotion",
+		event = "BufReadPost",
+	}
 }

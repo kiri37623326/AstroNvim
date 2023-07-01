@@ -47,6 +47,8 @@ maps.n["<leader>pv"] = { "<cmd>AstroVersion<cr>", desc = "AstroNvim Version" }
 maps.n["<leader>pl"] = { "<cmd>AstroChangelog<cr>", desc = "AstroNvim Changelog" }
 
 -- Manage Buffers
+maps.n["<leader>l"] = { function() require("astronvim.utils.buffer").nav(1) end, desc = "Cycle Next" }
+maps.n["<leader>h"] = { function() require("astronvim.utils.buffer").nav(-1) end, desc = "Cycle Back" }
 maps.n["<leader>c"] = { function() require("astronvim.utils.buffer").close() end, desc = "Close buffer" }
 maps.n["<leader>C"] = { function() require("astronvim.utils.buffer").close(0, true) end, desc = "Force close buffer" }
 maps.n["]b"] =
@@ -135,18 +137,18 @@ if is_available "mini.ai" then
 end
 
 -- Alpha
-if is_available "alpha-nvim" then
-  maps.n["<leader>h"] = {
-    function()
-      local wins = vim.api.nvim_tabpage_list_wins(0)
-      if #wins > 1 and vim.api.nvim_get_option_value("filetype", { win = wins[1] }) == "neo-tree" then
-        vim.fn.win_gotoid(wins[2]) -- go to non-neo-tree window to toggle alpha
-      end
-      require("alpha").start(false, require("alpha").default_config)
-    end,
-    desc = "Home Screen",
-  }
-end
+-- if is_available "alpha-nvim" then
+--   maps.n["<leader>h"] = {
+--     function()
+--       local wins = vim.api.nvim_tabpage_list_wins(0)
+--       if #wins > 1 and vim.api.nvim_get_option_value("filetype", { win = wins[1] }) == "neo-tree" then
+--         vim.fn.win_gotoid(wins[2]) -- go to non-neo-tree window to toggle alpha
+--       end
+--       require("alpha").start(false, require("alpha").default_config)
+--     end,
+--     desc = "Home Screen",
+--   }
+-- end
 
 -- Comment
 if is_available "Comment.nvim" then
@@ -242,10 +244,10 @@ else
 end
 
 -- SymbolsOutline
-if is_available "aerial.nvim" then
-  maps.n["<leader>l"] = sections.l
-  maps.n["<leader>lS"] = { function() require("aerial").toggle() end, desc = "Symbols outline" }
-end
+-- if is_available "aerial.nvim" then
+--   maps.n["<leader>l"] = sections.l
+--   maps.n["<leader>lS"] = { function() require("aerial").toggle() end, desc = "Symbols outline" }
+-- end
 
 -- Telescope
 if is_available "telescope.nvim" then
@@ -306,18 +308,18 @@ if is_available "telescope.nvim" then
     end,
     desc = "Find words in all files",
   }
-  maps.n["<leader>l"] = sections.l
-  maps.n["<leader>ls"] = {
-    function()
-      local aerial_avail, _ = pcall(require, "aerial")
-      if aerial_avail then
-        require("telescope").extensions.aerial.aerial()
-      else
-        require("telescope.builtin").lsp_document_symbols()
-      end
-    end,
-    desc = "Search symbols",
-  }
+  -- maps.n["<leader>l"] = sections.l
+  -- maps.n["<leader>ls"] = {
+  --   function()
+  --     local aerial_avail, _ = pcall(require, "aerial")
+  --     if aerial_avail then
+  --       require("telescope").extensions.aerial.aerial()
+  --     else
+  --       require("telescope.builtin").lsp_document_symbols()
+  --     end
+  --   end,
+  --   desc = "Search symbols",
+  -- }
 end
 
 -- Terminal

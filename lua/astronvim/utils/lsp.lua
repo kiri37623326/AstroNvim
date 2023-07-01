@@ -130,7 +130,7 @@ end
 M.on_attach = function(client, bufnr)
   local lsp_mappings = {
     n = {
-      ["<leader>ld"] = {
+      ["<leader>Ld"] = {
         function() vim.diagnostic.open_float() end,
         desc = "Hover diagnostics",
       },
@@ -142,7 +142,7 @@ M.on_attach = function(client, bufnr)
         function() vim.diagnostic.goto_next() end,
         desc = "Next diagnostic",
       },
-      ["gl"] = {
+      ["gL"] = {
         function() vim.diagnostic.open_float() end,
         desc = "Hover diagnostics",
       },
@@ -151,24 +151,24 @@ M.on_attach = function(client, bufnr)
   }
 
   if is_available "telescope.nvim" then
-    lsp_mappings.n["<leader>lD"] =
+    lsp_mappings.n["<leader>LD"] =
       { function() require("telescope.builtin").diagnostics() end, desc = "Search diagnostics" }
   end
 
   if is_available "mason-lspconfig.nvim" then
-    lsp_mappings.n["<leader>li"] = { "<cmd>LspInfo<cr>", desc = "LSP information" }
+    lsp_mappings.n["<leader>Li"] = { "<cmd>LspInfo<cr>", desc = "LSP information" }
   end
 
   if is_available "null-ls.nvim" then
-    lsp_mappings.n["<leader>lI"] = { "<cmd>NullLsInfo<cr>", desc = "Null-ls information" }
+    lsp_mappings.n["<leader>LI"] = { "<cmd>NullLsInfo<cr>", desc = "Null-ls information" }
   end
 
   if client.supports_method "textDocument/codeAction" then
-    lsp_mappings.n["<leader>la"] = {
+    lsp_mappings.n["<leader>La"] = {
       function() vim.lsp.buf.code_action() end,
       desc = "LSP code action",
     }
-    lsp_mappings.v["<leader>la"] = lsp_mappings.n["<leader>la"]
+    lsp_mappings.v["<leader>La"] = lsp_mappings.n["<leader>La"]
   end
 
   if client.supports_method "textDocument/codeLens" then
@@ -184,11 +184,11 @@ M.on_attach = function(client, bufnr)
       end,
     })
     if vim.g.codelens_enabled then vim.lsp.codelens.refresh() end
-    lsp_mappings.n["<leader>ll"] = {
+    lsp_mappings.n["<leader>Ll"] = {
       function() vim.lsp.codelens.refresh() end,
       desc = "LSP CodeLens refresh",
     }
-    lsp_mappings.n["<leader>lL"] = {
+    lsp_mappings.n["<leader>LL"] = {
       function() vim.lsp.codelens.run() end,
       desc = "LSP CodeLens run",
     }
@@ -209,11 +209,11 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.supports_method "textDocument/formatting" and not tbl_contains(M.formatting.disabled, client.name) then
-    lsp_mappings.n["<leader>lf"] = {
+    lsp_mappings.n["<leader>Lf"] = {
       function() vim.lsp.buf.format(M.format_opts) end,
       desc = "Format buffer",
     }
-    lsp_mappings.v["<leader>lf"] = lsp_mappings.n["<leader>lf"]
+    lsp_mappings.v["<leader>Lf"] = lsp_mappings.n["<leader>Lf"]
 
     vim.api.nvim_buf_create_user_command(
       bufnr,
@@ -306,21 +306,21 @@ M.on_attach = function(client, bufnr)
       function() vim.lsp.buf.references() end,
       desc = "References of current symbol",
     }
-    lsp_mappings.n["<leader>lR"] = {
+    lsp_mappings.n["<leader>LR"] = {
       function() vim.lsp.buf.references() end,
       desc = "Search references",
     }
   end
 
   if client.supports_method "textDocument/rename" then
-    lsp_mappings.n["<leader>lr"] = {
+    lsp_mappings.n["<leader>Lr"] = {
       function() vim.lsp.buf.rename() end,
       desc = "Rename current symbol",
     }
   end
 
   if client.supports_method "textDocument/signatureHelp" then
-    lsp_mappings.n["<leader>lh"] = {
+    lsp_mappings.n["<leader>Lh"] = {
       function() vim.lsp.buf.signature_help() end,
       desc = "Signature help",
     }
@@ -334,7 +334,7 @@ M.on_attach = function(client, bufnr)
   end
 
   if client.supports_method "workspace/symbol" then
-    lsp_mappings.n["<leader>lG"] = { function() vim.lsp.buf.workspace_symbol() end, desc = "Search workspace symbols" }
+    lsp_mappings.n["<leader>LG"] = { function() vim.lsp.buf.workspace_symbol() end, desc = "Search workspace symbols" }
   end
 
   if client.supports_method "textDocument/semanticTokens/full" and vim.lsp.semantic_tokens then
@@ -352,14 +352,14 @@ M.on_attach = function(client, bufnr)
       lsp_mappings.n.gI[1] = function() require("telescope.builtin").lsp_implementations() end
     end
     if lsp_mappings.n.gr then lsp_mappings.n.gr[1] = function() require("telescope.builtin").lsp_references() end end
-    if lsp_mappings.n["<leader>lR"] then
-      lsp_mappings.n["<leader>lR"][1] = function() require("telescope.builtin").lsp_references() end
+    if lsp_mappings.n["<leader>LR"] then
+      lsp_mappings.n["<leader>LR"][1] = function() require("telescope.builtin").lsp_references() end
     end
     if lsp_mappings.n.gT then
       lsp_mappings.n.gT[1] = function() require("telescope.builtin").lsp_type_definitions() end
     end
-    if lsp_mappings.n["<leader>lG"] then
-      lsp_mappings.n["<leader>lG"][1] = function()
+    if lsp_mappings.n["<leader>LG"] then
+      lsp_mappings.n["<leader>LG"][1] = function()
         vim.ui.input({ prompt = "Symbol Query: " }, function(query)
           if query then require("telescope.builtin").lsp_workspace_symbols { query = query } end
         end)
@@ -368,7 +368,7 @@ M.on_attach = function(client, bufnr)
   end
 
   if not vim.tbl_isempty(lsp_mappings.v) then
-    lsp_mappings.v["<leader>l"] = { desc = (vim.g.icons_enabled and " " or "") .. "LSP" }
+    lsp_mappings.v["<leader>L"] = { desc = (vim.g.icons_enabled and " " or "") .. "LSP" }
   end
   utils.set_mappings(user_opts("lsp.mappings", lsp_mappings), { buffer = bufnr })
 

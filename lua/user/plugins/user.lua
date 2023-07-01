@@ -41,22 +41,22 @@ return {
       require'hop'.setup()
     end
   },
-  { -- insert modeで行数を絶対値に
-		"myusuf3/numbers.vim",
-		event = "InsertEnter",
-		setup = function()
-      vim.g.numbers_exclude = {
-	      "tagbar",
-	      "NvimTree",
-	      "NvimTree",
-	      "gundo",
-	      "minibufexpl",
-	      "toggleterm",
-	      "dashboard",
-	      "packer",
-      }
-		end,
-	},
+ --  { -- insert modeで行数を絶対値に
+	-- 	"myusuf3/numbers.vim",
+	-- 	event = "InsertEnter",
+	-- 	setup = function()
+ --      vim.g.numbers_exclude = {
+	--       "tagbar",
+	--       "NvimTree",
+	--       "NvimTree",
+	--       "gundo",
+	--       "minibufexpl",
+	--       "toggleterm",
+	--       "dashboard",
+	--       "packer",
+ --      }
+	-- 	end,
+	-- },
 	{ -- fやtコマンドで一回か2回で飛べる文字をハイライト
 		"unblevable/quick-scope",
 		event = "BufReadPost",

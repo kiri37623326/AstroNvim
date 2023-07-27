@@ -6,8 +6,8 @@ return {
   },
   -- first key is the mode
   n = {
-    ["<leader>d"] = { "\"_d" },
-    ["<leader>c"] = { "\"_c" },
+    ["<leader>d"] = { '"_d' },
+    ["<leader>c"] = { '"_c' },
 
     ["ss"] = { ":<C-u>sp<CR>" },
     ["sv"] = { ":<C-u>vs<CR>" },
@@ -51,22 +51,21 @@ return {
     ["-"] = { "<C-x>" },
     ["<Leader>re"] = { ":%s;\\<<C-R><C-W>\\>;g<Left><Left>;" },
 
-
     -- hop.nvim mapping
-    ["<leader>jw"] = {"<cmd>HopWord<CR>"}, -- jump word
-    ["<leader>jv"] = {"<cmd>HopVertical<CR>"}, -- jump vertical
-    
+    ["<leader>jw"] = { "<cmd>HopWord<CR>" },     -- jump word
+    ["<leader>jv"] = { "<cmd>HopVertical<CR>" }, -- jump vertical
+
     -- edgemotion mapping
-		["<Leader>J"] = {"<Plug>(edgemotion-j)"},
-		["<Leader>K"] = {"<Plug>(edgemotion-k)"},
-		["di2"] = {'di"'},
-		["dif"] = {"di["},
-		["did"] = {"di]"},
-		["diu"] = {"di("},
-		["dii"] = {"di)"},
-		["dim"] = {"di{"},
-		["di,"] = {"di}"},
-		["dis"] = {"di`"},
+    ["<Leader>J"] = { "<Plug>(edgemotion-j)" },
+    ["<Leader>K"] = { "<Plug>(edgemotion-k)" },
+    ["di2"] = { 'di"' },
+    ["dif"] = { "di[" },
+    ["did"] = { "di]" },
+    ["diu"] = { "di(" },
+    ["dii"] = { "di)" },
+    ["dim"] = { "di{" },
+    ["di,"] = { "di}" },
+    ["dis"] = { "di`" },
   },
   -- o = {
   --   ["8"] = { "i(" },
